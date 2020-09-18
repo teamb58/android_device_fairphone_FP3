@@ -247,7 +247,7 @@ TARGET_RECOVERY_FSTAB := $(FP_PATH)/fstabs-4.9/recovery_AB_split_variant.fstab
 
 
 # SELinux
-include device/qcom/sepolicy/SEPolicy.mk
+include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += $(FP_PATH)/sepolicy/vendor
 #TODO: clean up elan policies
 BOARD_VENDOR_SEPOLICY_DIRS += $(FP_PATH)/elan_lib/fingerprint/sepolicy
