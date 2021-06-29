@@ -1,0 +1,2 @@
+# For front & back camera custom property
+get_prop(system_app, vendor_info_camera_prop)

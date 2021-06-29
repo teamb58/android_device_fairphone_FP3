@@ -1,0 +1,3 @@
+# Camera Properties
+persist.vendor.camera.            u:object_r:vendor_info_camera_prop:s0
+persist.camera.                   u:object_r:vendor_info_camera_prop:s0

@@ -1,0 +1,2 @@
+# For front & back camera custom property
+allow priv_app vendor_info_camera_prop:file { read open getattr };
