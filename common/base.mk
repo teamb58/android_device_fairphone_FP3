@@ -51,14 +51,6 @@ QTI_TELEPHONY_UTILS := qti-telephony-utils
 QTI_TELEPHONY_UTILS += qti_telephony_utils.xml
 
 
-#HOSTAPD
-HOSTAPD := hostapd
-HOSTAPD += hostapd.accept
-HOSTAPD += hostapd.deny
-HOSTAPD += hostapd_cli
-HOSTAPD += hostapd_default.conf
-
-
 #INIT
 INIT := fstab.qcom
 INIT += init.class_main.sh
@@ -118,12 +110,6 @@ PPP := ip-up-vpn
 STK := Stk
 
 
-#WPA
-WPA := wpa_supplicant.conf
-WPA += wpa_cli
-WPA += wpa_supplicant
-
-
 #ZLIB
 ZLIB_HOST := minigzip
 
@@ -138,9 +124,7 @@ CRDA := init.crda.sh
 
 
 #WLAN
-WLAN := prima_wlan.ko
-WLAN += pronto_wlan.ko
-WLAN += qca_cld_wlan.ko
+WLAN := pronto_wlan.ko
 
 
 ifneq ($(TARGET_HAS_LOW_RAM),true)
@@ -178,7 +162,6 @@ PRODUCT_PACKAGES += $(DATA_OS)
 PRODUCT_PACKAGES += $(DELAUN)
 PRODUCT_PACKAGES += $(E2FSPROGS)
 PRODUCT_PACKAGES += $(HIDL_WRAPPER)
-PRODUCT_PACKAGES += $(HOSTAPD)
 PRODUCT_PACKAGES += $(INIT)
 PRODUCT_PACKAGES += $(IPROUTE2)
 PRODUCT_PACKAGES += $(IPTABLES)
@@ -190,7 +173,6 @@ PRODUCT_PACKAGES += $(QTI_TELEPHONY_UTILS)
 PRODUCT_PACKAGES += $(STK)
 PRODUCT_PACKAGES += $(TINY_ALSA_TEST_APPS)
 PRODUCT_PACKAGES += $(WLAN)
-PRODUCT_PACKAGES += $(WPA)
 
 PRODUCT_PACKAGES += librs_jni
 PRODUCT_PACKAGES += libion

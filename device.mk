@@ -482,6 +482,49 @@ PRODUCT_PACKAGES += \
 	android.hardware.vibrator@1.0-service
 
 
+# WiFi
+# WLAN drivers
+PRODUCT_COPY_FILES += \
+	$(FP_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini \
+	$(FP_PATH)/wifi/WCNSS_wlan_dictionary.dat:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_wlan_dictionary.dat \
+	$(FP_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin # From Android 10
+
+# Flag to check if wcnss_service is built from source
+TARGET_USE_WCNSS_HAL := false
+
+# If building from source then drop proprietary dependency
+ifeq ($(TARGET_USE_WCNSS_HAL),true)
+TARGET_USES_QCOM_WCNSS_QMI := false
+endif
+
+# WiFi HAL
+PRODUCT_PACKAGES += \
+	android.hardware.wifi@1.0-service
+
+# WiFi Components
+PRODUCT_PACKAGES += \
+	hostapd \
+	hostapd.accept \
+	hostapd.deny \
+	hostapd_cli \
+	hostapd_default.conf \
+	libnl \
+	libqsap_sdk \
+	libwcnss_qmi \
+	libwifi-hal-qcom \
+	libwpa_client \
+	p2p_supplicant_overlay.conf \
+	vendor.qti.hardware.wifi.supplicant@1.0.vendor \
+	wcnss_service \
+	wificond \
+	wpa_cli \
+	wpa_supplicant.conf \
+	wpa_supplicant \
+	wpa_supplicant_overlay.conf \
+	WifiOverlay \
+	TetheringConfigOverlay
+
+
 # Call the proprietary setup
 # Call this in the end so that flags if required can be utilized.
 $(call inherit-product, device/fairphone/fp3-proprietary/device-vendor.mk)
