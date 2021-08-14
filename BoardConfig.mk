@@ -242,6 +242,8 @@ BOARD_VENDOR_KERNEL_MODULES := \
 	$(KERNEL_MODULES_OUT)/audio_machine_sdm450.ko \
 	$(KERNEL_MODULES_OUT)/audio_machine_ext_sdm450.ko
 
+BOARD_VENDOR_KERNEL_MODULES += $(KERNEL_MODULES_OUT)/pronto_wlan.ko
+
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -289,7 +291,20 @@ BOARD_VNDK_VERSION := current
 
 
 # WiFi
-
+BOARD_HAS_QCOM_WLAN := true
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_WLAN_DEVICE := qcwcn
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+WIFI_DRIVER_MODULE_NAME := "wlan"
+WIFI_DRIVER_MODULE_PATH := "vendor/lib/modules/pronto_wlan.ko"
+WIFI_DRIVER_FW_PATH_AP  := "ap"
+WIFI_DRIVER_FW_PATH_P2P := "p2p"
+WIFI_DRIVER_FW_PATH_STA := "sta"
+WIFI_DRIVER_INSTALL_TO_KERNEL_OUT := true# Part of proprietary code
+WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
+WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Vendor-specific definitions
 -include vendor/fairphone/fp3/BoardConfigVendor.mk

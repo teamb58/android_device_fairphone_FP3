@@ -111,6 +111,55 @@ LOCAL_SRC_FILES    := configs/$(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
 include $(BUILD_PREBUILT)
 
+ifeq ($(strip $(BOARD_HAS_QCOM_WLAN)),true)
+include $(CLEAR_VARS)
+LOCAL_MODULE       := wpa_supplicant_overlay.conf
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := wifi/$(LOCAL_MODULE)
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR)/etc/wifi
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := p2p_supplicant_overlay.conf
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := wifi/$(LOCAL_MODULE)
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR)/etc/wifi
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := hostapd_default.conf
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)/hostapd
+LOCAL_SRC_FILES    := wifi/hostapd.conf
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := hostapd.accept
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)/hostapd
+LOCAL_SRC_FILES    := wifi/hostapd.accept
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := hostapd.deny
+LOCAL_MODULE_TAGS  := optional
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_ETC)/hostapd
+LOCAL_SRC_FILES    := wifi/hostapd.deny
+include $(BUILD_PREBUILT)
+
+#Create symbolic links
+$(shell mkdir -p $(TARGET_OUT_VENDOR)/firmware/wlan/prima; \
+        ln -sf /vendor/etc/wifi/WCNSS_wlan_dictionary.dat \
+        $(TARGET_OUT_VENDOR)/firmware/wlan/prima/WCNSS_wlan_dictionary.dat; \
+        ln -sf /vendor/etc/wifi/WCNSS_qcom_cfg.ini \
+        $(TARGET_OUT_VENDOR)/firmware/wlan/prima/WCNSS_qcom_cfg.ini)
+endif
+
 
 #----------------------------------------------------------------------
 # Configs common to AndroidBoard.mk for all targets
