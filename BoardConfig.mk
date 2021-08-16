@@ -89,6 +89,10 @@ USE_XML_AUDIO_POLICY_CONF := 1
 
 
 # Bluetooth
+BLUETOOTH_HCI_USE_MCT := true
+BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/qcom/common
+BOARD_HAVE_BLUETOOTH := true
 
 
 #Board
