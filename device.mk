@@ -244,6 +244,66 @@ PRODUCT_COPY_FILES += \
 
 
 # Camera
+# Flag to check if Camera HAL binaries are built from source
+TARGET_USE_CAMERA_HAL := false
+
+PRODUCT_PACKAGES += \
+	android.frameworks.displayservice@1.0.vendor \
+	android.hidl.base@1.0.vendor \
+	android.hardware.camera.device@3.5 \
+	android.hardware.camera.provider@2.4 \
+	android.hardware.camera.provider@2.4-external \
+	android.hardware.camera.provider@2.4-impl \
+	android.hardware.camera.provider@2.4-legacy \
+	android.hardware.camera.provider@2.4-service \
+	android.hardware.camera.provider@2.6 \
+	camera.device@1.0-impl \
+	camera.device@3.5-impl \
+	camera.device@3.6-external-impl \
+	camera.msm8953 \
+	cameraconfig.txt \
+	libcamera2ndk_vendor \
+	libhal_dbg \
+	libjni_burstpmk \
+	libjni_imageutil \
+	libjni_snapcammosaic \
+	libjni_snapcamtinyplanet \
+	libmm-qcamera \
+	libmmcamera_interface \
+	libmmjpeg_interface \
+	libmmlib2d_interface \
+	libqomx_core \
+	libxml2 \
+	mm-qcamera-app \
+	vendor.qti.hardware.camera.device@1.0 \
+	vendor.qti.hardware.camera.device@1.0.vendor
+
+# Fairphone Camera
+PRODUCT_PACKAGES += \
+	FairphoneCamera
+
+# Arcsoft camera libraries
+PRODUCT_PACKAGES += \
+	libarcimageprocess \
+	libarcsoft_aiscenedetection \
+	libarcsoft_hdr_detection \
+	libarcsoft_high_dynamic_range \
+	libarcsoft_low_light_hdr \
+	libarcsoft_low_light_shot \
+	libarcsoft_object_tracking \
+	libarcsoft_panorama_burstcapture \
+	libarcsoft_singlecam_bokeh \
+	libarcsoft_videoautozoom \
+	libarcsoft_videostabs \
+	libmpbase \
+	libmpbase.vendor
+
+# Feature flags for camera
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+	frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
+	frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
+	frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
 
 # Component overrides
