@@ -287,6 +287,7 @@ BOARD_SECCOMP_POLICY := $(FP_PATH)/seccomp
 
 
 # Sensors
+USE_SENSOR_MULTI_HAL := true
 
 
 # Treble
