@@ -306,6 +306,21 @@ PRODUCT_COPY_FILES += \
 	$(FP_PATH)/init.qti.qseecomd.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qti.qseecomd.sh
 
 
+# Fingerprint
+PRODUCT_PACKAGES += \
+	android.hardware.biometrics.fingerprint@2.1 \
+	android.hardware.biometrics.fingerprint@2.1-service \
+	elan_device.rc \
+	fingerprint.default
+
+# Fingerprint files
+include $(FP_PATH)/elan_lib/fingerprint/elan_lib.mk
+
+# Fingerprint feature flag
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
+
+
 # Framework Detect
 PRODUCT_PACKAGES += \
 	libqti_vndfwk_detect \
