@@ -1,0 +1,8 @@
+
+ro.fps.module           u:object_r:fps_vendor_prop:s0
+ro.fps.sw.version       u:object_r:fps_vendor_prop:s0
+ro.fps.vendor           u:object_r:fps_vendor_prop:s0
+ro.fps.pt.errorbin      u:object_r:fps_vendor_prop:s0
+ro.fps.pt.version       u:object_r:fps_vendor_prop:s0
+ro.fps.pt.features      u:object_r:fps_vendor_prop:s0
+ro.fingerprint.module   u:object_r:fps_vendor_prop:s0

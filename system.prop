@@ -71,6 +71,11 @@ ro.crypto.allow_encrypt_override=true
 ro.crypto.volume.filenames_mode=aes-256-cts
 
 
+# Fingerprint
+#property to enable fingerprint
+persist.qfp=false
+
+
 # Graphics
 dalvik.vm.heapsize=36m
 debug.egl.hw=0

@@ -1,0 +1,27 @@
+prebuilt_etc {
+    name: "elan_device.rc",
+    owner: "fairphone",
+
+    src: "fingerprint/init/elan_device.rc",
+    sub_dir: "init",
+    proprietary: true,
+
+}
+
+cc_prebuilt_library_shared {
+    name: "fingerprint.default",
+    owner: "fairphone",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: ["fingerprint/20191021_SDM632_Ver07/fingerprint.default.so"],
+        },
+    },
+    compile_multilib: "64",
+    check_elf_files: false,
+    prefer: true,
+    relative_install_path: "hw",
+    proprietary: true,
+}
