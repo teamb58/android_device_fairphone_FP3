@@ -113,9 +113,6 @@ BUILD_BROKEN_NINJA_USES_ENV_VARS += RTIC_MPGEN
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 
 
-# Data
-
-
 # Dexpreopt
 # Enable dex pre-opt to speed up initial boot
 ifeq ($(HOST_OS),linux)
@@ -157,9 +154,6 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(FP_PATH)/configs/config.fs
-
-
-# GPS
 
 
 # Graphics
@@ -254,6 +248,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 
 
 # NFC
+BOARD_NFC_CHIPSET := pn553
 
 
 # Others
