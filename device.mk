@@ -46,6 +46,11 @@ TARGET_SYSTEM_PROP := device/$(TARGET_VENDOR)/$(PRODUCT_NAME)/system.prop
 # data can only be generated at the factory so don't generate persist.img
 FP3_SKIP_PERSIST_IMG := true
 
+
+# Operator specific overlays
+DEVICE_PACKAGE_OVERLAYS += \
+	$(LOCAL_PATH)/overlay-operators
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
 	$(LOCAL_PATH)/overlay
