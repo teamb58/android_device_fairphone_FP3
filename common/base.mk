@@ -192,7 +192,7 @@ PRODUCT_PACKAGES_DEBUG += $(TELEPHONY_DBG)
 
 # gps/location secuity configuration file
 PRODUCT_COPY_FILES += \
-	device/qcom/common/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
+	$(FP_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
 #copy codecs_xxx.xml to (TARGET_COPY_OUT_VENDOR)/etc/
 PRODUCT_COPY_FILES += \
@@ -202,27 +202,8 @@ PRODUCT_COPY_FILES += \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_audio.xml \
-	frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_video.xml \
-	device/qcom/common/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml
+	frameworks/av/media/libstagefright/data/media_codecs_google_c2_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_c2_video.xml
 
-
-# include additional build utilities
--include device/qcom/common/utils.mk
-
-
-ifneq ($(strip $(TARGET_BUILD_VARIANT)),user)
-PRODUCT_COPY_FILES += \
-	device/qcom/common/rootdir/etc/init.qcom.testscripts.sh:$(TARGET_COPY_OUT_PRODUCT)/etc/init.qcom.testscripts.sh
-endif
-
-# Set up flags to determine the kernel version
-ifeq ($(wildcard kernel/msm-$(TARGET_KERNEL_VERSION)),)
-     KERNEL_TO_BUILD_ROOT_OFFSET := ../
-     TARGET_KERNEL_SOURCE := kernel
-else
-     KERNEL_TO_BUILD_ROOT_OFFSET := ../../
-     TARGET_KERNEL_SOURCE := kernel/msm-$(TARGET_KERNEL_VERSION)
-endif
 
 #Enabling video for live effects
 -include frameworks/base/data/videos/VideoPackage1.mk
@@ -234,11 +215,6 @@ ifneq ($(BOARD_AVB_ENABLE), true)
       PRODUCT_VENDOR_VERITY_PARTITION=/dev/block/bootdevice/by-name/vendor
    endif
    $(call inherit-product, build/target/product/verity.mk)
-endif
-
-ifeq ($(TARGET_BUILD_VARIANT),user)
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES+= \
-	ro.adb.secure=1
 endif
 
 # OEM Unlock reporting
@@ -254,7 +230,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	vendor.usb.diag.func.name=diag
 endif
 
-TARGET_FS_CONFIG_GEN := device/qcom/common/config.fs
+TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/configs/config.fs
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.qcomsysd.enabled=1

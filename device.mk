@@ -16,30 +16,23 @@
 FP_PATH := device/fairphone/FP3
 
 # Call the vendor setup
-$(call inherit-product-if-exists, vendor/fairphone/fp3-common/device-vendor.mk)
+$(call inherit-product-if-exists, vendor/fairphone/FP3/FP3-vendor.mk)
 
 $(call inherit-product, build/make/target/product/product_launched_with_p.mk)
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
-$(call inherit-product, device/fairphone/fp3-common/common/common64.mk)
+$(call inherit-product, device/fairphone/FP3/common/common64.mk)
 
-PRODUCT_NAME := FP3
-PRODUCT_DEVICE := FP3
-PRODUCT_MODEL := FP3
 PRODUCT_MANUFACTURER := Fairphone
 PRODUCT_BRAND := Fairphone
 
-
-# Allow using custom and expressive names for our Android flavors while in fact
-# targeting the same model with all of them.
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_MODEL=FP3 PRODUCT_NAME=FP3
 
 # vendor/qcom/proprietary/common/config/device-vendor.mk --> PRODUCT_LIST
 TARGET_BASE_PRODUCT := FP3
 TARGET_VENDOR := fairphone
 
-TARGET_SYSTEM_PROP := device/$(TARGET_VENDOR)/$(PRODUCT_NAME)/system.prop
+TARGET_SYSTEM_PROP := device/$(TARGET_VENDOR)/$(TARGET_BASE_PRODUCT)/system.prop
 
 
 # We don't have the calibration data as this sort of
@@ -242,10 +235,6 @@ PRODUCT_PACKAGES += \
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2160
 TARGET_SCREEN_WIDTH := 1080
-
-
-PRODUCT_COPY_FILES += \
-	vendor/fairphone/media/bootanimation/bootanimation.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
 
 
 # Camera
@@ -510,8 +499,7 @@ PRODUCT_COPY_FILES += \
 	$(FP_PATH)/media/media_profiles_8953_v1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_8953_v1.xml \
 	$(FP_PATH)/media/media_codecs_8953_v1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor_v1.xml \
 	$(FP_PATH)/media/media_codecs_performance_8953_v1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_v1.xml \
-	$(FP_PATH)/media/media_codecs_vendor_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor_audio.xml \
-	device/qcom/common/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
+	$(FP_PATH)/media/media_codecs_vendor_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor_audio.xml
 
 
 # NFC
@@ -723,10 +711,6 @@ PRODUCT_PACKAGES += \
 	WifiOverlay \
 	TetheringConfigOverlay
 
-
-# Call the proprietary setup
-# Call this in the end so that flags if required can be utilized.
-$(call inherit-product, device/fairphone/fp3-proprietary/device-vendor.mk)
 
 ###################################################################################
 # This is the End of target.mk file.
