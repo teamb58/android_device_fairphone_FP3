@@ -1,50 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
-#----------------------------------------------------------------------
-# Compile Linux Kernel
-#----------------------------------------------------------------------
-ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
-ifeq ($(KERNEL_DEFCONFIG),)
-	KERNEL_DEFCONFIG := msm8953_defconfig
-endif
-else
-ifeq ($(KERNEL_DEFCONFIG),)
-	KERNEL_DEFCONFIG := msm8953-perf_defconfig
-endif
-endif
-
-DTC := $(HOST_OUT_EXECUTABLES)/dtc$(HOST_EXECUTABLE_SUFFIX)
-
-# Include Kernel Config file
-include device/fairphone/FP3/BoardConfigKernel.mk
-
-# ../../ prepended to paths because kernel is at ./kernel/msm-x.x
-TEMP_TOP=$(shell pwd)
-TARGET_KERNEL_MAKE_ENV := DTC_EXT=$(TEMP_TOP)/$(DTC)
-TARGET_KERNEL_MAKE_ENV += CONFIG_BUILD_ARM64_DT_OVERLAY=y
-
-TARGET_KERNEL_MAKE_ENV += HOSTCC=$(TEMP_TOP)/$(SOONG_LLVM_PREBUILTS_PATH)/clang
-TARGET_KERNEL_MAKE_ENV += HOSTAR=$(TEMP_TOP)/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ar
-TARGET_KERNEL_MAKE_ENV += HOSTLD=$(TEMP_TOP)/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8/bin/x86_64-linux-ld
-TARGET_KERNEL_MAKE_ENV += HOSTCFLAGS="-I/usr/include -I/usr/include/x86_64-linux-gnu -L/usr/lib -L/usr/lib/x86_64-linux-gnu -fuse-ld=lld"
-TARGET_KERNEL_MAKE_ENV += HOSTLDFLAGS="-L/usr/lib -L/usr/lib/x86_64-linux-gnu -fuse-ld=lld"
-
-#Enable llvm support for kernel
-KERNEL_LLVM_SUPPORT := true
-
-#Enable sd-llvm suppport for kernel
-KERNEL_SD_LLVM_SUPPORT := false
-
-include $(TARGET_KERNEL_SOURCE)/AndroidKernel.mk
-
-ifeq ($(TARGET_KERNEL_VERSION), 4.9)
-$(TARGET_PREBUILT_KERNEL): $(DTC)
-endif
-
-$(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
-	$(transform-prebuilt-to-target)
-
-
+ifeq ($(TARGET_DEVICE),FP3)
 #----------------------------------------------------------------------
 # Copy additional target-specific files
 #----------------------------------------------------------------------
@@ -182,20 +138,66 @@ endif
 #----------------------------------------------------------------------
 # Configs common to AndroidBoard.mk for all targets
 #----------------------------------------------------------------------
-include vendor/qcom/opensource/core-utils/build/AndroidBoardCommon.mk
+# From vendor/qcom/opensource/core-utils/build/AndroidBoardCommon.mk
 
-#----------------------------------------------------------------------
-# override default make with prebuilt make path (if any)
-#----------------------------------------------------------------------
-ifneq (, $(wildcard $(shell pwd)/prebuilts/build-tools/linux-x86/bin/make))
-    MAKE := $(shell pwd)/prebuilts/build-tools/linux-x86/bin/$(MAKE)
+#A/B builds require us to create the mount points at compile time.
+#Just creating it for all cases since it does not hurt.
+FIRMWARE_MOUNT_POINT := $(TARGET_OUT_VENDOR)/firmware_mnt
+BT_FIRMWARE_MOUNT_POINT := $(TARGET_OUT_VENDOR)/bt_firmware
+DSP_MOUNT_POINT := $(TARGET_OUT_VENDOR)/dsp
+PERSIST_MOUNT_POINT := $(TARGET_ROOT_OUT)/persist
+ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MOUNT_POINT) \
+				 $(BT_FIRMWARE_MOUNT_POINT) \
+				 $(DSP_MOUNT_POINT)
+
+$(FIRMWARE_MOUNT_POINT):
+	@echo "Creating $(FIRMWARE_MOUNT_POINT)"
+	@mkdir -p $(TARGET_OUT_VENDOR)/firmware_mnt
+ifneq ($(TARGET_MOUNT_POINTS_SYMLINKS),false)
+	@ln -sf /vendor/firmware_mnt $(TARGET_ROOT_OUT)/firmware
 endif
 
-#----------------------------------------------------------------------
-# extra images
-#----------------------------------------------------------------------
-ifeq (, $(wildcard vendor/qcom/build/tasks/generate_extra_images.mk))
-    include device/qcom/common/generate_extra_images.mk
-else
-    include vendor/qcom/build/tasks/generate_extra_images.mk
+$(BT_FIRMWARE_MOUNT_POINT):
+	@echo "Creating $(BT_FIRMWARE_MOUNT_POINT)"
+	@mkdir -p $(TARGET_OUT_VENDOR)/bt_firmware
+ifneq ($(TARGET_MOUNT_POINTS_SYMLINKS),false)
+	@ln -sf /vendor/bt_firmware $(TARGET_ROOT_OUT)/bt_firmware
 endif
+
+$(DSP_MOUNT_POINT):
+	@echo "Creating $(DSP_MOUNT_POINT)"
+	@mkdir -p $(TARGET_OUT_VENDOR)/dsp
+ifneq ($(TARGET_MOUNT_POINTS_SYMLINKS),false)
+	@ln -sf /vendor/dsp $(TARGET_ROOT_OUT)/dsp
+endif
+
+$(PERSIST_MOUNT_POINT):
+	@echo "Creating $(PERSIST_MOUNT_POINT)"
+ifneq ($(TARGET_MOUNT_POINTS_SYMLINKS),false)
+	@ln -sf /mnt/vendor/persist $(TARGET_ROOT_OUT)/persist
+endif
+
+ifeq ($(TARGET_ENABLE_VM_SUPPORT),true)
+VM_SYSTEM_MOUNT_POINT := $(TARGET_OUT_VENDOR)/vm-system
+$(VM_SYSTEM_MOUNT_POINT):
+	@echo "Creating $(VM_SYSTEM_MOUNT_POINT)"
+	@mkdir -p $(TARGET_OUT_VENDOR)/vm-system
+
+ALL_DEFAULT_INSTALLED_MODULES += $(VM_SYSTEM_MOUNT_POINT)
+endif
+
+# Defining BOARD_PREBUILT_DTBOIMAGE here as AndroidBoardCommon.mk
+# is included before build/core/Makefile, where it is required to
+# set the dependencies on prebuilt_dtbo.img based on definition of
+# BOARD_PREBUILT_DTBOIMAGE
+ifeq ($(strip $(BOARD_KERNEL_SEPARATED_DTBO)),true)
+ifndef BOARD_PREBUILT_DTBOIMAGE
+BOARD_PREBUILT_DTBOIMAGE := $(PRODUCT_OUT)/prebuilt_dtbo.img
+endif
+endif
+
+LIBION_HEADER_PATHS := \
+	system/memory/libion/include \
+	system/memory/libion/kernel-headers
+
+endif#TARGET_DEVICE
