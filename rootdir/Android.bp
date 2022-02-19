@@ -30,6 +30,15 @@ prebuilt_etc {
 
 }
 
+prebuilt_etc {
+    name: "init.qcom.usb.rc",
+    owner: "qcom",
+
+    src: "etc/init.qcom.usb.rc",
+    sub_dir: "init/hw",
+    proprietary: true,
+}
+
 sh_binary {
     name: "init.class_main.sh",
     owner: "qcom",
@@ -123,6 +132,14 @@ sh_binary {
     owner: "qcom",
 
     srcs: ["etc/init.qcom.ssr.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.usb.sh",
+    owner: "qcom",
+
+    src: "etc/init.qcom.usb.sh",
     proprietary: true,
 }
 

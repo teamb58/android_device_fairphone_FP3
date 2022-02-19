@@ -656,7 +656,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	android.hardware.usb@1.0-service
 
--include vendor/qcom/opensource/usb/vendor_product.mk
+PRODUCT_PROPERTY_OVERRIDES += vendor.usb.diag.func.name=diag
+PRODUCT_PROPERTY_OVERRIDES += vendor.usb.use_ffs_mtp=0
 
 
 # Vendor move
@@ -719,6 +720,5 @@ PRODUCT_PACKAGES += \
 $(call inherit-product-if-exists,  hardware/qcom/gps/gps_vendor_product.mk)
 $(call inherit-product-if-exists,  vendor/qcom/opensource/commonsys-intf/display/config/display-product-system.mk)
 $(call inherit-product-if-exists,  vendor/qcom/opensource/commonsys-intf/display/config/display-interfaces-product.mk)
-$(call inherit-product-if-exists,  vendor/qcom/opensource/usb/vendor_product.mk)
 $(call inherit-product-if-exists,  vendor/qcom/opensource/vibrator/vibrator-vendor-product.mk)
 ###################################################################################
