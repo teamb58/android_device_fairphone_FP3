@@ -1,0 +1,17 @@
+cc_library {
+    name: "bootctrl.msm8953",
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    shared_libs: [
+        "liblog",
+        "librecovery_updater_msm",
+        "libcutils",
+    ],
+    header_libs: ["libhardware_headers"],
+    srcs: ["boot_control.cpp"],
+    relative_install_path: "hw",
+    owner: "qti",
+    vendor: true,
+}
