@@ -30,7 +30,8 @@ cc_library {
     name: "librecovery_updater",
     vendor: true,
     recovery_available: true,
-    defaults: ["libion_header_paths" ,"ufsbsg_defaults"],
+    defaults: ["ufsbsg_defaults"],
+    include_dirs: ["system/memory/libion/include"] + ["system/memory/libion/kernel-headers"],
     srcs: [
         "gpt-utils.cpp",
         "dec.cpp",
@@ -61,4 +62,24 @@ cc_library {
             "qti_kernel_headers",
             "device_kernel_headers",
     ],
+}
+
+cc_library {
+    name: "librecovery_updater_msm",
+
+    include_dirs: ["bootable/recovery"] + ["system/memory/libion/include"] + ["system/memory/libion/kernel-headers"],
+    srcs: [
+        "gpt-utils.cpp",
+        "recovery-ufs-bsg.cpp",
+    ],
+    cflags: ["-Wall"],
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libz",
+        "libion",
+    ],
+    header_libs: ["generated_kernel_headers"],
+    export_include_dirs: ["."],
+    vendor: true,
 }
