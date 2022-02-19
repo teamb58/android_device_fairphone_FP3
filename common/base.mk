@@ -123,10 +123,6 @@ CHARGER += charger_res_images
 CRDA := init.crda.sh
 
 
-#WLAN
-WLAN := pronto_wlan.ko
-
-
 ifneq ($(TARGET_HAS_LOW_RAM),true)
 ifneq ($(TARGET_SUPPORTS_ANDROID_WEAR),true)
 TELEPHONY_DBG := NrNetworkSettingApp
@@ -172,7 +168,6 @@ PRODUCT_PACKAGES += $(PPP)
 PRODUCT_PACKAGES += $(QTI_TELEPHONY_UTILS)
 PRODUCT_PACKAGES += $(STK)
 PRODUCT_PACKAGES += $(TINY_ALSA_TEST_APPS)
-PRODUCT_PACKAGES += $(WLAN)
 
 PRODUCT_PACKAGES += librs_jni
 PRODUCT_PACKAGES += libion

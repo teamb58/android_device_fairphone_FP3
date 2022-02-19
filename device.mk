@@ -169,34 +169,6 @@ DEVICE_PACKAGE_OVERLAYS += $(AUDIO_HAL_PATH)/configs/common/overlay
 -include $(LOCAL_PATH)/audio_properties.mk
 
 
-# Audio Kernel modules
-AUDIO_DLKM := audio_apr.ko
-AUDIO_DLKM += audio_q6_notifier.ko
-AUDIO_DLKM += audio_adsp_loader.ko
-AUDIO_DLKM += audio_q6.ko
-AUDIO_DLKM += audio_usf.ko
-AUDIO_DLKM += audio_pinctrl_wcd.ko
-AUDIO_DLKM += audio_swr.ko
-AUDIO_DLKM += audio_wcd_core.ko
-AUDIO_DLKM += audio_swr_ctrl.ko
-AUDIO_DLKM += audio_wsa881x.ko
-AUDIO_DLKM += audio_wsa881x_analog.ko
-AUDIO_DLKM += audio_platform.ko
-AUDIO_DLKM += audio_cpe_lsm.ko
-AUDIO_DLKM += audio_hdmi.ko
-AUDIO_DLKM += audio_stub.ko
-AUDIO_DLKM += audio_wcd9xxx.ko
-AUDIO_DLKM += audio_mbhc.ko
-AUDIO_DLKM += audio_wcd9335.ko
-AUDIO_DLKM += audio_wcd_cpe.ko
-AUDIO_DLKM += audio_digital_cdc.ko
-AUDIO_DLKM += audio_analog_cdc.ko
-AUDIO_DLKM += audio_native.ko
-AUDIO_DLKM += audio_machine_sdm450.ko
-AUDIO_DLKM += audio_machine_ext_sdm450.ko
-PRODUCT_PACKAGES += $(AUDIO_DLKM)
-
-
 # ANT
 PRODUCT_PACKAGES += \
 	AntHalService \
@@ -464,12 +436,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	$(FP_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf \
 	$(FP_PATH)/configs/msm_irqbalance_little_big.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance_little_big.conf
-
-
-# Kernel modules
-# Kernel modules install path
-KERNEL_MODULES_INSTALL := dlkm
-KERNEL_MODULES_OUT := out/target/product/$(PRODUCT_NAME)/$(KERNEL_MODULES_INSTALL)/lib/modules
 
 
 # LED packages
