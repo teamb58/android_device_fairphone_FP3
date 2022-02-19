@@ -1,0 +1,159 @@
+//files that live under device/qcom/common/rootdir/etc/
+
+prebuilt_etc {
+    name: "init.qcom.rc",
+    owner: "qcom",
+
+    src: "etc/init.qcom.rc",
+    sub_dir: "init/hw",
+    proprietary: true,
+
+}
+
+prebuilt_etc {
+    name: "init.recovery.qcom.rc",
+    owner: "qcom",
+
+    src: "etc/init.recovery.qcom.rc",
+    sub_dir: "init/hw",
+    proprietary: true,
+
+}
+
+prebuilt_etc {
+    name: "init.qcom.factory.rc",
+    owner: "qcom",
+
+    src: "etc/init.qcom.factory.rc",
+    sub_dir: "init/hw",
+    proprietary: true,
+
+}
+
+sh_binary {
+    name: "init.class_main.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.class_main.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.crda.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.crda.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.mdm.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.mdm.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.class_core.sh",
+    owner: "qcom",
+
+    srcs: ["init.qcom.class_core.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.coex.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.qcom.coex.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.debug.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.qcom.debug.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.early_boot.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.qcom.early_boot.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.efs.sync.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.qcom.efs.sync.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.post_boot.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.qcom.early_boot.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.sdio.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.qcom.sdio.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.qcom.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qcom.ssr.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.qcom.ssr.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.qti.can.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.qti.can.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "init.veth_ipa_config.sh",
+    owner: "qcom",
+
+    srcs: ["etc/init.veth_ipa_config.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "qca6234-service.sh",
+    owner: "qcom",
+
+    srcs: ["etc/qca6234-service.sh"],
+    proprietary: true,
+}
+
+sh_binary {
+    name: "sku-info.sh",
+    owner: "qcom",
+
+    srcs: ["etc/sku-info.sh"],
+    proprietary: true,
+}
