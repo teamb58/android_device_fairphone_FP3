@@ -112,7 +112,7 @@ PRODUCT_PACKAGES += \
 	tinymix
 
 
-AUDIO_HAL_PATH := vendor/qcom/opensource/audio-hal/primary-hal
+AUDIO_HAL_PATH := hardware/qcom-caf/msm8953/audio
 
 # Audio files
 PRODUCT_COPY_FILES += \
