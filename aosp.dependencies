@@ -1,0 +1,12 @@
+[
+  {
+    "repository": "kernel_fairphone_sdm632",
+    "target_path": "kernel/fairphone/sdm632"
+  }
+  {
+    "remote": "pixel-devices-blobs",
+    "repository": "vendor_fairphone_FP3",
+    "target_path": "vendor/fairphone/FP3",
+    "branch": "twelve"
+  }
+]
