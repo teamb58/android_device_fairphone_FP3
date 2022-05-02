@@ -81,7 +81,6 @@ lib64/libmmcamera_faceproc.so
 lib64/libmmcamera_faceproc2.so
 lib64/libmmrtpdecoder.so
 lib64/libmmrtpencoder.so
-lib64/libmpbase.so
 lib64/libsdm-disp-apis.so
 lib64/libseemore.so
 lib64/libsensorndkbridge.so
